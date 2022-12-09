@@ -267,6 +267,7 @@ class NautobotInterface(Interface):
             name=ids["name"],
             device=OrmDevice.objects.get(name=ids["device"], site=Site.objects.get(name=ids["site"])),
             description=attrs["description"],
+            status=Status.objects.get(slug="active"),
             type=attrs["type"],
         )
         _interface.custom_field_data["gbic_vendor"] = attrs["gbic_vendor"]
@@ -291,6 +292,8 @@ class NautobotInterface(Interface):
         )
         if attrs.get("description"):
             _interface.description = attrs["description"]
+        if attrs.get("status"):
+            _interface.status = Status.objects.get(slug="active")
         if attrs.get("type"):
             _interface.type = attrs["type"]
         if attrs.get("gbic_vendor"):
