@@ -345,6 +345,10 @@ class NautobotIPAddress(IPAddress):
                 )
             except ObjectNotCreated:
                 diffsync.job.log_warning(message=f"{_device} creating interface {_interface}")
+            except OrmInterface.DoesNotExist:
+                diffsync.job.log_warning(message=f"Interface {_interface} not found for {_device}")
+                obj_type = None
+                obj_id = None
         else:
             obj_type = None
             obj_id = None
